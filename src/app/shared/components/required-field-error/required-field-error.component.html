@@ -1,0 +1,19 @@
+@if (formGroup.controls[field].hasError('required') &&
+(formGroup.controls[field].dirty || formGroup.controls[field].touched)) {
+  <div class="text-danger">Campo obrigatório
+  </div>
+}
+
+@if (formGroup.controls[field].hasError('minlength') ||
+formGroup.controls[field].hasError('maxlength')) {
+  <div class="text-danger">Quantidade de caracteres inválida
+  </div>
+}
+
+@if (formGroup.controls[field].hasError('email')) {
+  <div class="text-danger">Formato de e-mail inválido
+  </div>
+
+
+}
+

@@ -1,0 +1,17 @@
+<div>
+  <app-header  (click)="toggleSidebar()" class="topnavbar-wrapper"></app-header>
+
+  <app-sidebar [isOpen]="sidebarOpen"></app-sidebar>
+
+  @if (sidebarOpen){
+    <div  class="overlay" (click)="closeSidebar()"></div>
+  }
+
+  <section class="section-container">
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

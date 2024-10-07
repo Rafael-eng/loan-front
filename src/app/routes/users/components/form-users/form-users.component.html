@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Criar/Editar Usuário</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body mb-3">
+  <form [formGroup]="formGroup" (ngSubmit)="saveData()">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="name">Nome:</label>
+        <input class="form-control" id="name" type="text" formControlName="name" />
+        <app-required-field-error [formGroup]="formGroup" field="name"></app-required-field-error>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="email">E-mail:</label>
+        <input class="form-control" id="email" type="email" formControlName="email" />
+        <app-required-field-error [formGroup]="formGroup" field="email"></app-required-field-error>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="phone">Telefone:</label>
+        <input class="form-control" id="phone" type="text" formControlName="phone" />
+        <app-required-field-error [formGroup]="formGroup" field="phone"></app-required-field-error>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="float-right">
+        <button type="button" class="btn btn-info btn-sm" (click)="cancel()">Cancelar</button>
+        <button type="submit" class="ml-3 btn btn-primary btn-sm">Salvar</button>
+      </div>
+    </div>
+  </form>
+</div>

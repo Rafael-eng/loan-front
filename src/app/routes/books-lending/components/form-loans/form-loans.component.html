@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Editar</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body mb-3">
+  <form [formGroup]="formGroup" (ngSubmit)="saveData()">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="status">Status:</label>
+        <input class="form-control" id="status" type="text" formControlName="status" />
+        <app-required-field-error [formGroup]="formGroup" field="status"></app-required-field-error>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label>Data de Devolução:</label>
+        <input type="date" id="returnDate" class="form-control" formControlName="returnDate"/>
+      </div>
+      <div class="col-md-12">
+        <app-required-field-error [formGroup]="formGroup" field="returnDate"></app-required-field-error>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="float-right">
+        <button type="button" class="btn btn-info btn-sm" (click)="cancel()">Cancelar</button>
+        <button type="submit" class="ml-3 btn btn-primary btn-sm">Salvar</button>
+      </div>
+    </div>
+  </form>
+</div>
