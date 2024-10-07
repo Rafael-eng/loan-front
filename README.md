@@ -1,4 +1,4 @@
-# Library Management Frontend
+# Sobre o Projeto
 
 Este projeto foi gerado com Angular CLI versão 18.2.7.
 
