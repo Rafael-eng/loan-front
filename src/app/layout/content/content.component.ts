@@ -22,14 +22,11 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sidebarOpen = false;
+  sidebarOpen = true;
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
   }
 
-  closeSidebar() {
-    this.sidebarOpen = false;
-  }
 
 }

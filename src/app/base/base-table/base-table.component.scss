@@ -1,0 +1,23 @@
+th.sortable {
+  cursor: pointer;
+  position: relative;
+}
+
+th.ascending::after,
+th.descending::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  border: 5px solid transparent;
+}
+
+th.ascending::after {
+  border-bottom-color: #000;
+  transform: translateY(-50%);
+}
+
+th.descending::after {
+  border-top-color: #000;
+  transform: translateY(-50%);
+}

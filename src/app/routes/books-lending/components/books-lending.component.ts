@@ -13,6 +13,9 @@ import {PagedLoanResponse} from '../../../models/paged-loans-response-model';
 import {Loan} from '../../../models/loan.model';
 import {ModalService} from '@developer-partners/ngx-modal-dialog';
 import {FormLoansComponent} from './form-loans/form-loans.component';
+import {PagedResponse} from '../../../base';
+import {UserDTO} from '../../../dto/user-dto';
+import {UserFilter} from '../../../filter/user-filter';
 
 @Component({
   selector: 'app-books-lending',
@@ -25,8 +28,10 @@ import {FormLoansComponent} from './form-loans/form-loans.component';
   ],
   styleUrls: ['./books-lending.component.html']
 })
+
 export class BooksLendingComponent implements OnInit {
-  users: any[] = [];
+  users: PagedResponse<UserDTO>;
+  usersFilter: UserFilter = {unpaged:true};
   booksLending: any[] = [];
   selectedUserId!: number;
   selectedBookId!: number;
@@ -46,13 +51,11 @@ export class BooksLendingComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
-    this.loadBooksLending();
-    this.retrieveLendings()
   }
 
   loadUsers(): void {
-    this.userService.getAllList().subscribe((data) => {
-      this.users = data;
+      this.userService.list(this.usersFilter).subscribe( r =>  {
+      this.users = r;
     });
   }
 

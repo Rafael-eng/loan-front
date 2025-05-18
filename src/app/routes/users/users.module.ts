@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {NgxSpinnerComponent} from 'ngx-spinner';
 import {UsersComponent} from './components/users.component';
+import {BaseTableComponent} from '../../base/base-table/base-table.component';
 
 const routes: Routes = [
   {path: "", component: UsersComponent}
@@ -17,6 +18,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxPaginationModule,
     NgxSpinnerComponent,
+    BaseTableComponent,
   ],
   exports: [RouterModule]
 })

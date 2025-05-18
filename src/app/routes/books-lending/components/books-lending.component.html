@@ -1,3 +1,4 @@
+<div class="container">
 <div class="table-responsive mb-5 ">
   <h2>Empréstimo de livro</h2>
 
@@ -5,7 +6,7 @@
     <div class="form-group">
       <label for="userSelect">Selecione o Usuário:</label>
       <select id="userSelect" class="form-control" [(ngModel)]="selectedUserId" name="userSelect" required>
-        @for (user of users; track user.id) {
+        @for (user of users.content; track user.id) {
           <option [value]="user.id">{{ user.name }}</option>
         }
       </select>
@@ -15,12 +16,12 @@
       <label for="bookSelect">Selecione o Livro:</label>
       <select id="bookSelect" class="form-control" [(ngModel)]="selectedBookId" name="bookSelect" required>
         @for (book of booksLending; track book.id) {
-          <option [disabled]="users.length == 0" [value]="book.id">{{ book.title }}</option>
+          <option [disabled]="users.content.length == 0" [value]="book.id">{{ book.title }}</option>
         }
       </select>
     </div>
 
-    <button [disabled]="users.length == 0 || booksLending.length == 0" type="submit" class="btn btn-primary mt-3">Confirmar Empréstimo</button>
+    <button [disabled]="users.content.length == 0 || booksLending.length == 0" type="submit" class="btn btn-primary mt-3">Confirmar Empréstimo</button>
   </form>
 </div>
 
@@ -71,4 +72,4 @@
 <ngx-spinner size="medium" type="ball-clip-rotate" [fullScreen]="true">
   <p style="color: white"></p>
 </ngx-spinner>
-
+</div>

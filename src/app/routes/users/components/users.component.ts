@@ -1,69 +1,37 @@
-import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {User} from '../../../models/user.model';
+import {Component, OnInit} from '@angular/core';
 import {ModalService} from '@developer-partners/ngx-modal-dialog';
 import {FormUsersComponent} from './form-users/form-users.component';
 import {UsersService} from '../../../service/user.service';
-import {PagedUserResponse} from '../../../models/paged-user-response.model';
-import {Router} from '@angular/router';
+import {UserDTO} from '../../../dto/user-dto';
+import {BasePage} from '../../../base/base-page';
+import {UserFilter} from '../../../filter/user-filter';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  styleUrl: './users.component.scss',
 })
-export class UsersComponent implements OnInit {
-  page: number = 1;
-  pageSize: any;
-  users!: PagedUserResponse<User>;
-  count: any;
+export class UsersComponent extends BasePage<UserDTO, UserFilter> implements OnInit {
 
-  @ViewChild(FormUsersComponent) formUsersComponent!: FormUsersComponent;
+  protected columns = [
+    { name: 'name', label: 'Nome do Usuário', sortable: true },
+    { name: 'email', label: 'E-mail de Contato', sortable: true },
+    { name: 'phone', label: 'Telefone', sortable: true },
+    { name: 'registrationDate', label: 'Data do registro', sortable: true }
+  ];
 
-  constructor(private readonly modalService: ModalService, private usersService: UsersService, private router: Router
+  protected buttons = [
+    { label: 'Editar', class: 'btn-primary', click: this.editItem.bind(this) },
+    { label: 'Excluir', class: 'btn-danger', click: this.deleteItem.bind(this) }
+  ];
+
+  constructor(modalService: ModalService, _service: UsersService
   ) {
+    super(modalService, _service, FormUsersComponent);
   }
 
   ngOnInit(): void {
-    this.retrieveUsers();
+     this.list();
   }
 
-  retrieveUsers(): void {
-    this.usersService.getAll(this.page, this.pageSize).subscribe({
-      next: (data: PagedUserResponse<User>) => {
-        this.users = data;
-        this.pageSize= this.users.page.size
-        this.count = this.users.page.totalElements;
-      },
-      error: (e) => console.error(e)
-    });
-  }
-
-  pageChangeEvent(event: number) {
-    this.page = event;
-    this.retrieveUsers();
-  }
-
-  createUser(): void {
-    this.modalService.show<User>(FormUsersComponent, {
-      title: 'Adicionar livro',
-    }).result().subscribe(addUser => {
-      this.users._embedded.userResponseList.push(addUser);
-      this.retrieveUsers();
-    })
-  }
-
-  editUser(user: User): void {
-    this.modalService.show<User>(FormUsersComponent, {
-      title: 'Editar informações',
-      model: user,
-    }).result().subscribe(user => {
-      let index = this.users._embedded.userResponseList.indexOf(user);
-      this.users._embedded.userResponseList[index] = user;
-      this.retrieveUsers();
-    })
-  }
-
-  redirectRecommended(userId: number): void {
-    this.router.navigate(['/recommendation'], { queryParams: { userId: userId } });
-  }
 }

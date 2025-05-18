@@ -5,6 +5,8 @@ import { LayoutModule } from './layout/layout.module';
 import {RouterModule} from '@angular/router';
 import {RoutesModule} from './routes/routes.module';
 import {ModalModule} from '@developer-partners/ngx-modal-dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import {ModalModule} from '@developer-partners/ngx-modal-dialog';
     RouterModule,
     AppComponent,
     RoutesModule,
-    ModalModule
+    ModalModule,
+    BrowserAnimationsModule
   ],
   providers: [],
 })
