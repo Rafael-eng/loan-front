@@ -8,6 +8,7 @@ import {lastValueFrom} from 'rxjs';
 import {BaseFormComponent} from './base-form-component';
 import {ModalService} from '@developer-partners/ngx-modal-dialog';
 import {Functions} from '../shared/util/functions';
+import {LazyLoadEvent} from 'primeng/api';
 
 export abstract class BasePage<T extends BaseDTO, F extends BaseFilterDTO
 > {
@@ -37,10 +38,10 @@ export abstract class BasePage<T extends BaseDTO, F extends BaseFilterDTO
   unpaged = false;
 
   protected async list(event?: any): Promise<PagedResponse<T>> {
+    console.log(event)
+
     if (event) {
-      this.page = event.page ?? 0;
-      this.size = event.size ?? 5;
-      this.sortDirection = event.sortDirection ?? 'ASC';
+      this.sortDirection = event.sortDirection == 1 ? 'ASC' : 'DESC';
       this.sortField = event.sortField ?? 'id';
     }
 
@@ -70,8 +71,10 @@ export abstract class BasePage<T extends BaseDTO, F extends BaseFilterDTO
     }
   }
 
-  protected async pageChangeEvent(event: number) {
-    this.page = event;
+  protected async pageChangeEvent(event: LazyLoadEvent) {
+    this.size = event.rows!;
+    this.page = event.first ? event.first / event.rows! : 0;
+    this.filters = { ...this.filters, sortField: event.sortField, sortDirection: event.sortOrder, page: this.page };
     await this.list(this.filters);
   }
 

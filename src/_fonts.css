@@ -1,0 +1,28 @@
+body {
+  font-family: 'Satoshi', sans-serif;
+}
+
+.heading-xs {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.heading-sm {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.body-lg-bold {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.body-sm {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.body-sm-bold {
+  font-size: 14px;
+  font-weight: 700;
+}

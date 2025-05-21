@@ -22,7 +22,7 @@ export class BaseFormComponent<T extends BaseDTO> implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(BaseService) private service: BaseService<T>,
+    private service: BaseService<T>,
     private readonly modalReference: ModalReference<T>,
   ) {
     this.$service = service;
@@ -42,7 +42,6 @@ export class BaseFormComponent<T extends BaseDTO> implements OnInit {
   }
 
   protected validateForm(): boolean {
-    console.log(this.form)
     return this.form.valid;
   }
 

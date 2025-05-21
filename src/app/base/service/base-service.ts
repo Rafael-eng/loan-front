@@ -5,7 +5,7 @@ import {environment} from '../../shared/environment/environment';
 import {BaseFilterDTO} from '../dto/base-filter-dto';
 
 export interface PagedResponse<T> {
-  content: T[];
+  content?: T[];
   size: number;
   totalElements: number;
   totalPages: number;
@@ -23,6 +23,7 @@ export abstract class BaseService<T extends BaseDTO>{
 
   list(filter: BaseFilterDTO ): Observable<PagedResponse<T>> {
     this.loading = true;
+    console.log(filter)
 
     filter.sortDirection = filter.sortDirection ?? 'ASC';
     filter.sortField = filter.sortField ?? 'id';
@@ -32,8 +33,8 @@ export abstract class BaseService<T extends BaseDTO>{
 
 
     const params = new HttpParams()
-      .set('page', (filter.page > 0 ? filter.page - 1 : filter.page).toString())
-      .set('size', filter.size.toString())
+      .set('page', filter.page)
+      .set('size', filter.size)
       .set('sortDirection', filter.sortDirection)
       .set('sortField', filter.sortField)
       .set('unpaged', filter.unpaged);

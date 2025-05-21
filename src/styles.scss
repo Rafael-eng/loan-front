@@ -1,59 +1,737 @@
-@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css';
-@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+@use  "tailwindcss";
+@use  "tailwindcss-primeui";
+@use  "primeicons/primeicons.css";
+@use  "./_fonts.css";
 
-body {
-  background: #f5f5f5;
+html, body {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
-a {
+body {
+  background-color: #F2F4F8;
+}
+
+app-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+
+html, body, app-root, .layout-container, .main-layout, .main-content, .content {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #00BCD4;
+  --secondary: #00BCD4;
+  --success: #3D8C24;
+  --warning: #FFC107;
+  --danger: #B7192C;
+}
+
+/***************************************
+ * ESTILIZAÇÃO DE BOTÕES
+ ***************************************/
+button.p-button {
+  padding: 0.5rem 1rem !important;
+  width: 100% !important;
+  max-height: 3rem !important;
+}
+
+/* Botões principais */
+.primary-button {
+  background-color: #00A4E4;
+  color: white;
+  border: none;
+}
+
+/* Botões secundários */
+.secondary-button {
+  background-color: transparent !important;
+  color: #00A4E4 !important;
+  border: 1px solid #00A4E4 !important;
+}
+
+/* Botões de ação verde */
+.green-button {
+  background-color: #3D8C24 !important;
+  color: white !important;
+  border: none !important;
+}
+
+/* Botões de ação verde com borda */
+.green-outlined-button {
+  background-color: transparent !important;
+  color: #3D8C24 !important;
+  border: 2px solid #3D8C24 !important;
+}
+
+/* Botões vermelhos */
+.red-button {
+  background-color: #B7192C !important;
+  color: white !important;
+  border: none !important;
+}
+
+/* Botões vermelhos com borda */
+.red-outlined-button {
+  background-color: transparent !important;
+  color: #B7192C !important;
+  border: 1px solid #B7192C !important;
+}
+
+.text-button {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.5rem !important;
+  background-color: transparent;
+  color: black;
+  border: none !important;
+  box-shadow: none !important;
+  text-align: left !important;
+  transition: all 0.3s !important;
+}
+
+.button-transparent {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.5rem !important;
+  background-color: transparent !important;
+  color: black !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-align: left !important;
+  transition: all 0.3s !important;
+}
+
+.text-button:hover {
+  color: var(--primary) !important;
+}
+
+
+/* Efeitos de hover para botões */
+.primary-button:hover,
+.secondary-button:hover,
+.green-button:hover,
+.green-outlined-button:hover,
+.red-button:hover,
+.red-outlined-button:hover {
+  opacity: 0.8 !important;
+}
+
+.action-button-size {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+/***************************************
+ * ESTILIZAÇÃO DE FORMS
+ ***************************************/
+
+
+.form-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.avatar-wrapper {
+  width: 128px;
+  height: 128px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+
+.avatar-placeholder,
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #e2e8f0; /* cinza claro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d1d5db;
+}
+
+.avatar-button {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 50%;
+  padding: 0.5rem;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
-.navbar {
-  margin-bottom: 30px;
+.avatar-form-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  align-items: start;
 }
 
-.card {
-  border: none;
-  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
-  margin-bottom: 30px;
+@media screen and (max-width: 768px) {
+  .avatar-form-container {
+    grid-template-columns: 1fr;
+  }
 }
 
-.w-60 {
-  width: 60px;
+.form-content {
+  flex: 1;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0 0 10px;
-  font-weight: 600;
+/* Para telas muito grandes: mantém 4 colunas */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box; /* garante que padding/border não estoure */
 }
 
-.social-links li a {
-  -webkit-border-radius: 50%;
-  background-color: rgba(89, 206, 181, .85);
-  border-radius: 50%;
-  color: #fff;
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   display: inline-block;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
+  width: 100%;
+  font-weight: bold;
+}
+
+.required {
+  color: var(--danger);
+  margin-left: 0.25rem;
+}
+
+.section-header {
+  grid-column: span 4;
+}
+
+.half-width {
+  grid-column: span 2;
+}
+
+.mid-width {
+  grid-column: span 3;
+}
+
+.full-width {
+  grid-column: span 4;
+}
+
+.small-width {
+  grid-column: span 1;
+}
+
+/* Responsividade */
+
+/* Telas médias (≤ 1366px) → 2 colunas */
+@media screen and (max-width: 1366px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-header,
+  .full-width {
+    grid-column: span 2;
+  }
+
+  .mid-width {
+    grid-column: span 1;
+  }
+
+  .half-width,
+  .small-width {
+    grid-column: span 1;
+  }
+}
+
+/* Telas pequenas (≤ 768px) → 1 coluna */
+@media screen and (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header,
+  .full-width,
+  .mid-width,
+  .half-width,
+  .small-width {
+    grid-column: span 1;
+  }
+}
+
+
+/***************************************
+ * ESTILIZAÇÃO GERAL DE COMPONENTES
+ ***************************************/
+
+/* Container - usado para estilizar um componente */
+.container {
+  flex: 1;
+  width: 100%;
+  max-width: 3200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: 0.5rem; /* Menor gap em telas pequenas */
+  }
+}
+
+p-card {
+  width: 100% !important;
+}
+
+/* Tabela - Remover borda superior na primeira linha */
+.p-datatable-tbody > tr:first-child > td {
+  border-top: none;
+}
+
+/* Paginador */
+::ng-deep .p-paginator .p-dropdown-panel {
+  transform-origin: bottom !important;
+  top: auto !important;
+  bottom: 100% !important;
+}
+
+/***************************************
+ * FONTES E LABELS
+ ***************************************/
+
+/* Estilo do label de botão */
+span.p-button-label {
+  font-size: 14px;
+}
+
+/***************************************
+ * LAYOUT GERAL
+ ***************************************/
+
+/* Layout geral da página */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+app-sidebar {
+  flex-shrink: 0;
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.toolbar {
+  flex-shrink: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 0.5rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container principal */
+.main-container {
+  display: flex;
+  flex: 1;
+  margin-top: 60px;
+  height: calc(100vh - 60px);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 86px;
+  height: 100%;
+  background: #fff;
+  overflow: hidden;
+  transition: width 0.3s;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.sidebar.expanded {
+  width: 250px;
+}
+
+/***************************************
+ * BAR DE BOTOES (button-bar)
+ ***************************************/
+
+/* Barra de botões */
+.button-bar {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s ease-in-out;
+}
+
+.action-button {
+  width: 3rem !important;
+  height: 3rem !important;
+}
+
+.action-button-small {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
+.button-bar:hover {
+  color: #00A5E4;
+}
+
+.button-bar .img {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s ease-in-out;
+}
+
+.button-bar:hover .img {
+  filter: brightness(0) saturate(100%) invert(48%) sepia(95%) saturate(403%) hue-rotate(161deg) brightness(97%) contrast(101%);
+}
+
+/***************************************
+ * ESTILIZAÇÃO DE ICONS
+ ***************************************/
+
+/* Container do ícone */
+.icon-container {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+}
+
+/* Ícone */
+.icon {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Wrapper para ícone */
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
   width: 30px;
-  font-size: 12px;
+  height: 30px;
+  overflow: hidden;
 }
 
-a {
-  color: #707070;
-}
-i {
-  color: white;
+/* Wrapper para ícone com seta */
+.icon-wrapper-arrow {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
 }
 
-a {
-  color: white;
+.icon-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 60%;
+  left: 100%;
+  width: 36px;
+  height: 15px;
+  background-image: var(--asset-path);
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: left 0.3s ease-in-out;
+  opacity: 0.7;
+  filter: brightness(1.1) saturate(120%);
+  z-index: 2;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.button-bar:hover .icon-wrapper::after {
+  left: 0;
+}
+
+/***************************************
+ * OUTROS COMPONENTES
+ ***************************************/
+
+.gradient {
+  border-bottom: 2px solid;
+  border-image-source: linear-gradient(90deg, #12D0FF 0%, #FFC601 100%);
+  border-image-slice: 1;
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Submenu */
+.submenu {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+  margin-top: 0.5rem;
+}
+
+.submenu-item {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0.5rem 0;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.submenu-item:hover {
+  color: #0056b3;
+}
+
+/* Navegação */
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  position: relative;
+  top: 0;
+  z-index: 10;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Página atual */
+.current-page {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  gap: 5px;
+  color: #333;
+}
+
+.border-header {
+  border-bottom: 2px solid;
+
+  border-image-source: linear-gradient(90deg, #12D0FF 0%, #FFC601 100%);
+  border-image-slice: 1;
+}
+
+.border-footer {
+  border-top: 1px solid #B0B0B0
+}
+
+
+/***************************************
+ * ESTILIZAÇÃO DE INPUTGROUP
+ ***************************************/
+.p-inputgroup .p-inputtext {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-left: none !important;
+}
+
+.p-inputgroup-addon {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right: none !important;
+  background-color: #f4f4f4 !important;
+}
+
+.p-inputgroup-addon:hover {
+  border-right: none !important;
+}
+
+.p-inputgroup .p-inputtext:focus {
+  box-shadow: none !important;
+}
+
+
+/* Título da página */
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+/***************************************
+ * ESTILIZAÇÃO DE TOASTS
+ ***************************************/
+
+/* Toast de sucesso */
+:host ::ng-deep p-toast .p-toast-message-success {
+  display: flex;
+  align-items: center;
+  background-color: #DEF4D3 !important;
+  border-left: 6px solid #2A551F !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #2A551F !important;
+  max-width: 400px !important;
+  min-height: 60px;
+}
+
+:host ::ng-deep p-toast .p-toast-message-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Ícone do toast de sucesso */
+:host ::ng-deep p-toast .p-toast-message-success .p-toast-message-icon {
+  width: 24px !important;
+  height: 24px !important;
+  margin-right: 8px;
+  background-image: var(--asset-path-toast) !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  color: transparent !important;
+}
+
+/* Esconde o ícone SVG padrão no toast */
+:host ::ng-deep p-toast .p-toast-message-success checkicon svg {
+  display: none !important;
+}
+
+/* Estilo do ícone de fechamento no toast */
+:host ::ng-deep p-toast .p-toast-message-success .p-toast-close-icon {
+  color: #2A551F !important;
+  background: transparent !important;
+  border: none !important;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+:host ::ng-deep p-toast .p-toast-message-success .p-toast-close-icon:hover {
+  color: #1b3d14 !important;
+  background: rgba(34, 85, 31, 0.1) !important;
+}
+
+/* Texto de resumo no toast */
+:host ::ng-deep p-toast .p-toast-message-success .p-toast-summary {
+  font-weight: bold !important;
+  color: #2A551F !important;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Texto de detalhe no toast */
+:host ::ng-deep p-toast .p-toast-message-success .p-toast-detail {
+  font-size: 14px;
+  color: #2A551F !important;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Estilo geral do toast */
+:host ::ng-deep p-toast {
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+:host ::ng-deep .p-datatable-tbody > tr {
+  max-height: 48px !important;
+  overflow: hidden !important;
+}
+
+:host ::ng-deep .p-datatable-tbody > tr > td {
+  max-height: 48px !important;
+  overflow: hidden !important;
+  vertical-align: middle !important;
+}
+
+:host ::ng-deep .p-table thead > tr,
+:host ::ng-deep .p-table tbody > tr {
+  height: 48px !important;
+  min-height: 48px !important;
+}
+
+.p-table thead > tr > th,
+.p-table tbody > tr > td {
+  vertical-align: middle;
+  padding-top: 0;
+  padding-bottom: 0;
 }

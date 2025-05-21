@@ -1,25 +1,32 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, input, Input, OnInit, Output, signal} from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {FormsModule} from '@angular/forms';
-import {NgClass, NgSwitch} from '@angular/common';
+import {NgClass, NgIf, NgSwitch} from '@angular/common';
 import {PagedResponse} from '../service/base-service';
 import {BaseDTO} from '../dto/base-dto';
 import {BaseFilterDTO} from '../dto/base-filter-dto';
+import {Card} from 'primeng/card';
+import {TableModule} from 'primeng/table';
+import {Button} from 'primeng/button';
+import {Tooltip} from 'primeng/tooltip';
+import {LazyLoadEvent} from 'primeng/api';
 
 @Component({
   selector: 'app-base-table',
   standalone: true,
   imports: [
     NgxPaginationModule,
-    FormsModule,
-    NgSwitch,
-    NgClass
+    FormsModule, Card,
+    TableModule,
+    Button,
+    Tooltip,
+    NgIf,
   ],
   templateUrl: './base-table.component.html',
   styleUrl: './base-table.component.scss'
 })
 export class BaseTableComponent<T extends BaseDTO> implements OnInit {
-  @Input() data: PagedResponse<T>;
+  data =  input.required<PagedResponse<T>>();
   @Input() columns: {
     name: string;
     label: string;
@@ -28,10 +35,10 @@ export class BaseTableComponent<T extends BaseDTO> implements OnInit {
   @Input() size: number;
   @Input() page: number;
   @Input() totalRecords: number;
-  @Input() buttons: { label: string, class: string, click: (row: any) => void }[] = [];
-  @Input() hasCheckbox = false;
+  buttons = input<{ label: string; class: string; click: (row: any) => void }[]>([]);
+  hasCheckbox = input<boolean>(false);
   @Input() filters: BaseFilterDTO;
-  @Output() pageChange = new EventEmitter<number>();
+  @Output() pageChange = new EventEmitter<any>();
   @Output() filtersChange = new EventEmitter<BaseFilterDTO>();
 
 
@@ -46,13 +53,13 @@ export class BaseTableComponent<T extends BaseDTO> implements OnInit {
     return item[column] || '';
   }
 
-  protected async pageChangeEvent(event: number) {
+  protected async pageChangeEvent(event: any) {
     this.pageChange.emit(event);
   }
 
   toggleSelectAll(event: any) {
     if (event.target.checked) {
-      this.selectedItems = new Set(this.data.content);
+      this.selectedItems = new Set(this.data().content);
     } else {
       this.selectedItems.clear();
     }
@@ -76,7 +83,7 @@ export class BaseTableComponent<T extends BaseDTO> implements OnInit {
   }
 
   isAllSelected(): boolean {
-    return this.data.content.every(item => this.selectedItems.has(item));
+    return this.data().content!.every(item => this.selectedItems.has(item));
   }
 
   onSort(field: string): void {
